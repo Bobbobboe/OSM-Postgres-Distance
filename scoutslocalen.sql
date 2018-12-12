@@ -1,3 +1,4 @@
+--Query for finding all scoutslokalen in 10 km of my house
 select *
 from planet_osm_polygon
 where ST_Distance(
