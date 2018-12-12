@@ -1,0 +1,32 @@
+1) Install postgres en postgis
+	user@linux ~ $ sudo pacman -S postgres postgis
+
+2) Maak een postgres databank aan
+	user@linux ~ $ sudo -u postgres -i
+	postgres@linux ~ $ createdb database
+	postgres@linux ~ $ psql database
+
+3) Voeg postgis toe aan databank
+	database=# CREATE EXTENSION postgis;
+	 
+	CTRL + Z
+	postgres@linux ~ $
+
+4) Download OSM file
+	url = https://download.geofabrik.de/europe/belgium.html
+
+5) Install osm2pgsql
+	user@linux ~ $ yay -S osm2pgsql
+
+6) Voeg OSM toe aam Postgres
+	postgres@linux ~ $ osm2pgsql -s -U postgres -d database /path/naar/belgium-latest.osm.pbf
+
+7) Wachten
+	Dit kan enkele minuten duren
+
+8) Testen
+	postgres@linux ~ $ psql database
+	database=# SELECT count(osm_id) FROM public.planet_osm_line;
+	
+	Als het geluk is dan krijg je als antwoord een count > 0
+ 
